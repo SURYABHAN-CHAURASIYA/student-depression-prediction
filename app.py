@@ -6,7 +6,7 @@ import joblib
 st.set_page_config(page_title="Student Depression Predictor", page_icon="🧠", layout="wide")
 
 # Load trained model
-model = joblib.load("models\depression_model.pkl")
+model = joblib.load("depression_model.pkl")
 
 # Title
 st.title("Student Depression Predictor")
