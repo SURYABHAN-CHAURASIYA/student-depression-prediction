@@ -51,8 +51,14 @@ X_train, X_test, y_train, y_test = train_test_split(X_res, y_res, test_size=0.2,
 model.fit(X_train, y_train)
 
 # Save
-with open("depression_model.pkl", "wb") as f:
-    pickle.dump(model, f)
+# Save
+if __name__ == "__main__":
+    model.fit(X_train, y_train)
 
-with open("label_encoder.pkl", "wb") as f:
-    pickle.dump(le, f)print("Model trained successfully!")
+    with open("depression_model.pkl", "wb") as f:
+        pickle.dump(model, f)
+
+    with open("label_encoder.pkl", "wb") as f:
+        pickle.dump(le, f)
+
+    print("Model trained successfully!")
