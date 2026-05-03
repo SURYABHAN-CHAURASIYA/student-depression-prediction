@@ -1,13 +1,20 @@
 import streamlit as st
 import pandas as pd
-import joblib
+
 
 # Page config
 st.set_page_config(page_title="Student Depression Predictor", page_icon="🧠", layout="wide")
 
 # Load trained model
-model = joblib.load("depression_model.pkl")
+import os
+import joblib
 
+model_path = "depression_model.pkl"
+
+if not os.path.exists(model_path):
+    import train_model  # model create karega
+
+model = joblib.load(model_path)
 # Title
 st.title("Student Depression Predictor")
 st.write("Fill the details below to predict whether a student may be at risk of depression.")
