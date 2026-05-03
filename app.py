@@ -1,20 +1,14 @@
 import streamlit as st
 import pandas as pd
 
-
 # Page config
 st.set_page_config(page_title="Student Depression Predictor", page_icon="🧠", layout="wide")
 
-# Load trained model
-import os
-import joblib
+# 🔥 MODEL LOAD FIX (NO PICKLE ISSUE)
+import train_model
 
-model_path = "depression_model.pkl"
+model, le = train_model.get_model()
 
-if not os.path.exists(model_path):
-    import train_model  # model create karega
-
-model = joblib.load(model_path)
 # Title
 st.title("Student Depression Predictor")
 st.write("Fill the details below to predict whether a student may be at risk of depression.")
@@ -58,8 +52,7 @@ if st.button("Predict Depression"):
         "Sleep Duration": [sleep],
         "Dietary Habits": [diet],
         "Degree": [degree],
-        # Yahan exact name wahi rakho jo error ne bataya hai:
-        "Have you ever had suicidal thoughts 0": [1 if suicidal == "Yes" else 0], 
+        "Have you ever had suicidal thoughts 0": [1 if suicidal == "Yes" else 0],
         "Work/Study Hours": [hours],
         "Financial Stress": [financial],
         "Family History of Mental Illness": [family_hist]
@@ -77,9 +70,9 @@ This prediction is only an AI-based estimate, not a medical diagnosis.
 Please consider these support options:
 - Talk to a trusted friend, family member, or teacher.
 - Reach out to your college counseling center.
-- **Kiran Mental Health Helpline (India): 1800-599-0019**
-- **AASRA Helpline: +91 22 2754 6669**
-- **Vandrevala Foundation Helpline: 9999 666 555**
+- Kiran Mental Health Helpline (India): 1800-599-0019
+- AASRA Helpline: +91 22 2754 6669
+- Vandrevala Foundation Helpline: 9999 666 555
         """)
     else:
         st.success("Prediction: Not Depressed")
